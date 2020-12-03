@@ -64,26 +64,21 @@ public class MainActivity extends AppCompatActivity {
                                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                             String item = (String) listView.getItemAtPosition(position);
                                             String latlng ="";
-                                            Toast.makeText(MainActivity.this,"You selected : " + item,Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this,"Voce escolheu : " + item,Toast.LENGTH_SHORT).show();
                                           try {
                                               JSONArray jsonObject = new JSONArray(response);
 
                                               for (int i = 0; i < jsonObject.length() ; i++) {
-                                                  System.out.println("########################################################################################################################"+item+"&&&&&&&&&&&&");
-                                                  System.out.println("########################################################################################################################"+jsonObject.getJSONObject(i).get("name").toString()+"&&&&&&&&&&&&");
-                                                  System.out.println("-----------------------------------------");
-                                                  String itemcompar=jsonObject.getJSONObject(i).get("name").toString();
-                                                    
-                                                  if(item == itemcompar ){
-                                                      System.out.println("--------------------fsdude---------------------");
+                                                 String itemcompar=jsonObject.getJSONObject(i).get("name").toString();
 
+                                                  if(item == itemcompar ){
                                                       latlng =jsonObject.getJSONObject(i).get("latlng").toString();
                                                   }
 
                                               }
                                               Intent pais =new Intent(MainActivity.this, MapsActivity.class);
 
-                                               pais.putExtra("pais", latlng);
+                                               pais.putExtra("pais",item);
                                               //pais.putExtra("key",latlng);
                                               startActivity(pais);
                                           }catch (JSONException e){  e.printStackTrace();}
