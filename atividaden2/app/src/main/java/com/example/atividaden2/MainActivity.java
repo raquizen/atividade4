@@ -44,13 +44,12 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 List<String> names = new ArrayList<String>();
-                                List<String> latlng1 = new ArrayList();
                                 //System.out.println(response);
                                 try {
                                     JSONArray jsonObject = new JSONArray(response);
                                     for (int i = 0; i < jsonObject.length() ; i++) {
                                         names.add(jsonObject.getJSONObject(i).get("name").toString());
-                                        latlng1.add(jsonObject.getJSONObject(i).get("latlng").toString());
+
                                     }
 
                                     listView.setAdapter(new ArrayAdapter<String>(
@@ -71,15 +70,15 @@ public class MainActivity extends AppCompatActivity {
                                               for (int i = 0; i < jsonObject.length() ; i++) {
                                                  String itemcompar=jsonObject.getJSONObject(i).get("name").toString();
 
-                                                  if(item == itemcompar ){
+                                                  if(item.contains(itemcompar)){
                                                       latlng =jsonObject.getJSONObject(i).get("latlng").toString();
                                                   }
 
                                               }
                                               Intent pais =new Intent(MainActivity.this, MapsActivity.class);
 
-                                               pais.putExtra("pais",item);
-                                              //pais.putExtra("key",latlng);
+                                               //pais.putExtra("pais",item);
+                                              pais.putExtra("latlng",latlng);
                                               startActivity(pais);
                                           }catch (JSONException e){  e.printStackTrace();}
 
